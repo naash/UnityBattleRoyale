@@ -1,0 +1,16 @@
+- Character
+	- Hook Inputs 
+	- Hook animations
+	- Add follow cam
+
+- Level Design
+	- Basic terrain
+	- Foliage
+	- Structures
+
+- Weapons (with interaction)
+- HUD
+- AI
+- Main menu
+- Networking	
+	

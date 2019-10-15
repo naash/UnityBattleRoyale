@@ -6,6 +6,10 @@ namespace BattleRoyale
 {
     public class UserControlUI : MonoBehaviour
     {
+        [Header("UI References")]
+        [SerializeField] RectTransform handleImage;
+        [SerializeField] float distanceLimit = 35.0f;
+
         [SerializeField] ThirdPersonCharacter m_Character;
 
         float hDelta = 0.0f;
@@ -16,6 +20,14 @@ namespace BattleRoyale
         private Vector3 m_Move;
         private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
         private bool m_Crouch;
+        private bool m_DragStarted = false;
+
+        private Vector3 m_initialHandlePosition;
+        private float m_currentHandleSnapDuration = 0.0f;
+        private float m_handleSnapDuration = 0.25f;
+        private Vector3 m_HandleFromPos;
+       
+
         // Start is called before the first frame update
         void Start()
         {
@@ -36,6 +48,13 @@ namespace BattleRoyale
 
             m_Move = Vector3.zero;
 
+            if(handleImage)
+            {
+                m_initialHandlePosition = handleImage.position;
+            }
+
+
+            m_currentHandleSnapDuration = 2.0f;
         }
 
         // Update is called once per frame
@@ -61,6 +80,32 @@ namespace BattleRoyale
 
             m_Crouch = Input.GetKey(KeyCode.C);
             m_Jump = Input.GetKey(KeyCode.Space);
+
+
+            if(m_DragStarted)
+            {
+                //Get touch position
+                Vector3 pos = Input.mousePosition;
+
+                handleImage.position = pos;
+
+                if (Vector3.Distance(pos, m_initialHandlePosition) > distanceLimit)
+                {
+                    handleImage.position = m_initialHandlePosition + (Vector3.Normalize(pos - m_initialHandlePosition) * distanceLimit);
+                }
+
+                vDelta = (handleImage.position.y - m_initialHandlePosition.y) / distanceLimit;
+                hDelta = (handleImage.position.x - m_initialHandlePosition.x) / distanceLimit;
+            }
+            else
+            {
+                if(m_currentHandleSnapDuration <= 1.0f)
+                {
+                    m_currentHandleSnapDuration += Time.deltaTime / m_handleSnapDuration;
+
+                    handleImage.position = Vector3.Lerp(m_HandleFromPos, m_initialHandlePosition, m_currentHandleSnapDuration);
+                }
+            }
         }
 
         private void FixedUpdate()
@@ -115,6 +160,21 @@ namespace BattleRoyale
         public void OnCrouchPressed()
         {
             m_Crouch = true;
+        }
+
+        public void OnHandleDragStarted()
+        {
+            m_DragStarted = true;
+        }
+
+        public void OnHandleDragEnded()
+        {
+            m_DragStarted = false;
+
+            m_currentHandleSnapDuration = 0.0f;
+
+            m_HandleFromPos = handleImage.position;
+            //Code to snap
         }
     }
 }

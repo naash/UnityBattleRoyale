@@ -26,7 +26,10 @@ namespace BattleRoyale
         private float m_currentHandleSnapDuration = 0.0f;
         private float m_handleSnapDuration = 0.25f;
         private Vector3 m_HandleFromPos;
-       
+
+
+        Vector2 m_mouseCurrentPosition;
+        Vector2 m_mousePreviousPosition;
 
         // Start is called before the first frame update
         void Start()
@@ -47,8 +50,9 @@ namespace BattleRoyale
             //m_Character = GetComponent<ThirdPersonCharacter>();
 
             m_Move = Vector3.zero;
-
-            if(handleImage)
+            m_mouseCurrentPosition = Vector2.zero;
+            m_mousePreviousPosition = m_mouseCurrentPosition;
+            if (handleImage)
             {
                 m_initialHandlePosition = handleImage.position;
             }
@@ -68,15 +72,30 @@ namespace BattleRoyale
             {
                 vDelta = -1.0f;
             }
+            else
+            {
+                vDelta = 0.0f;
+            }
 
             if (Input.GetKey(KeyCode.D))
             {
                 hDelta = 1.0f;
+
+                //hDelta = Mathf.Min(1.0f, hDelta + 0.01f);
             }
             else if (Input.GetKey(KeyCode.A))
             {
                 hDelta = -1.0f;
+
+               // hDelta = Mathf.Max(-1.0f, hDelta - 0.01f);
             }
+            else
+            {
+                hDelta = 0.0f;
+            }
+
+            m_mousePreviousPosition = m_mouseCurrentPosition;
+            m_mouseCurrentPosition = Input.mousePosition;
 
             m_Crouch = Input.GetKey(KeyCode.C);
             m_Jump = Input.GetKey(KeyCode.Space);
@@ -135,7 +154,7 @@ namespace BattleRoyale
             //Debug.Log(m_Move);
 
             // pass all parameters to the character control script
-            m_Character.Move(m_Move, m_Crouch, m_Jump);
+            m_Character.Move(m_Move, (m_mouseCurrentPosition - m_mousePreviousPosition).x, m_Crouch, m_Jump);
             m_Jump = false;
 
             hDelta = 0.0f;

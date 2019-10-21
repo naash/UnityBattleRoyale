@@ -70,7 +70,7 @@ namespace BattleRoyale
             Debug.Log(m_Move);
 
             // pass all parameters to the character control script
-            m_Character.Move(m_Move, crouch, m_Jump);
+            m_Character.Move(m_Move,0.0f, crouch, m_Jump);
             m_Jump = false;
         }
     }

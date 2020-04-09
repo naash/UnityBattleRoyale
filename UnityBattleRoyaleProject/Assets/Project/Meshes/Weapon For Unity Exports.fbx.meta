@@ -1,0 +1,346 @@
+fileFormatVersion: 2
+guid: b5d37f7819b284e1e8708f5de5d74d22
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Ammo .45 ACP
+    100002: Ammo 5.56
+    100004: Ammo 7.62
+    100006: Ammo 9mm
+    100008: Ammo Shotgun Shells
+    100010: Cube.001
+    100012: Gun Scar
+    100014: Gun Shotgun
+    100016: Gun Sniper
+    100018: Gun UMP
+    100020: Gun Uzi
+    100022: Gun Winchester
+    100024: Melee Fireaxe
+    100026: Melee Pan
+    100028: Melee Pickaxe
+    100030: Melee Shovel
+    100032: Melee Throwing Axe
+    100034: Melee Woodcutting Axe
+    100036: Sidearm Revolver
+    100038: //RootNode
+    400000: Ammo .45 ACP
+    400002: Ammo 5.56
+    400004: Ammo 7.62
+    400006: Ammo 9mm
+    400008: Ammo Shotgun Shells
+    400010: Cube.001
+    400012: Gun Scar
+    400014: Gun Shotgun
+    400016: Gun Sniper
+    400018: Gun UMP
+    400020: Gun Uzi
+    400022: Gun Winchester
+    400024: Melee Fireaxe
+    400026: Melee Pan
+    400028: Melee Pickaxe
+    400030: Melee Shovel
+    400032: Melee Throwing Axe
+    400034: Melee Woodcutting Axe
+    400036: Sidearm Revolver
+    400038: //RootNode
+    2300000: Ammo .45 ACP
+    2300002: Ammo 5.56
+    2300004: Ammo 7.62
+    2300006: Ammo 9mm
+    2300008: Ammo Shotgun Shells
+    2300010: Cube.001
+    2300012: Gun Scar
+    2300014: Gun Shotgun
+    2300016: Gun Sniper
+    2300018: Gun UMP
+    2300020: Gun Uzi
+    2300022: Gun Winchester
+    2300024: Melee Fireaxe
+    2300026: Melee Pan
+    2300028: Melee Pickaxe
+    2300030: Melee Shovel
+    2300032: Melee Throwing Axe
+    2300034: Melee Woodcutting Axe
+    2300036: Sidearm Revolver
+    3300000: Ammo .45 ACP
+    3300002: Ammo 5.56
+    3300004: Ammo 7.62
+    3300006: Ammo 9mm
+    3300008: Ammo Shotgun Shells
+    3300010: Cube.001
+    3300012: Gun Scar
+    3300014: Gun Shotgun
+    3300016: Gun Sniper
+    3300018: Gun UMP
+    3300020: Gun Uzi
+    3300022: Gun Winchester
+    3300024: Melee Fireaxe
+    3300026: Melee Pan
+    3300028: Melee Pickaxe
+    3300030: Melee Shovel
+    3300032: Melee Throwing Axe
+    3300034: Melee Woodcutting Axe
+    3300036: Sidearm Revolver
+    4300000: Cube.001
+    4300002: Ammo .45 ACP
+    4300004: Ammo 7.62
+    4300006: Ammo 5.56
+    4300008: Ammo Shotgun Shells
+    4300010: Ammo 9mm
+    4300012: Gun UMP
+    4300014: Gun Scar
+    4300016: Gun Winchester
+    4300018: Melee Shovel
+    4300020: Sidearm Revolver
+    4300022: Melee Pickaxe
+    4300024: Melee Fireaxe
+    4300026: Melee Throwing Axe
+    4300028: Gun Uzi
+    4300030: Melee Woodcutting Axe
+    4300032: Gun Sniper
+    4300034: Melee Pan
+    4300036: Gun Shotgun
+    2186277476908879412: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 9mm Orange
+    second: {fileID: 2100000, guid: 009aad1e25d1a4ece93aa72e7aaa25f3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ACP Blue
+    second: {fileID: 2100000, guid: 74f910770a4b04941be5d3bb30ad079d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ammo Color
+    second: {fileID: 2100000, guid: c80eb581fd1644482a0960badcc83f5a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Axe Head Metal 001
+    second: {fileID: 2100000, guid: 6aef291a08343449696a2b84a4c6df94, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Axe Head Metal 002
+    second: {fileID: 2100000, guid: 23d9318b6386049fdacab1e3ec67c39d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Box Color
+    second: {fileID: 2100000, guid: ca6c9493c636241369009b0aa38ca019, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Box Decal
+    second: {fileID: 2100000, guid: 8fa377918748d4e20b2010b4fa242ed9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Copper
+    second: {fileID: 2100000, guid: 4572ed1b5b5a5472782ddfa8e763dda3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Deagle Base Paint
+    second: {fileID: 2100000, guid: de1ea5dc51843440a92f7268e6880692, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Deagle Pad and sights
+    second: {fileID: 2100000, guid: 55a028055c9d44c779b962246a43c33d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fireaxe Metal
+    second: {fileID: 2100000, guid: c6f9efec97b6c44a48065e939b3ed707, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fireaxe Red
+    second: {fileID: 2100000, guid: ea3c2f905cc9c48cd93d62867e08495e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gun Metal Dark Gray
+    second: {fileID: 2100000, guid: 9fd4c876bca1d4662bfcc498763cccbc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gun Metal Navy Gray
+    second: {fileID: 2100000, guid: a0fa59fece7a8484da45cda8bd3c7adb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Handle
+    second: {fileID: 2100000, guid: d6a11b28e738943ad944726add3a773f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Inner Box
+    second: {fileID: 2100000, guid: 101820173e87c4db7a1f2421b2a04d69, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lighter Wood Stock
+    second: {fileID: 2100000, guid: f73ff1b754a124781828f55a4d1bb6b7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 1cb1c9f5ee2ae483aa85177e82ccfc49, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pan
+    second: {fileID: 2100000, guid: 8243c76d082e8467d8b8c5c45bc1f0ed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pickaxe head
+    second: {fileID: 2100000, guid: f6a7733e83b134efcbb1ee478d4fada8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Revolver Base Metal
+    second: {fileID: 2100000, guid: ec11b2a8327004680a5ef6d9200bf3c5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Revolver Secondary Color
+    second: {fileID: 2100000, guid: 20827f6c17eda4ae6bd8082b76c66239, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rifle Box Color
+    second: {fileID: 2100000, guid: 6c8da63ca5e6b4733a133513bcf48002, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Scar Base Color
+    second: {fileID: 2100000, guid: 9d9ea9d52f5304022bc9f7c4a29a8e53, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Scar Black Colors
+    second: {fileID: 2100000, guid: 09167084288e74ac28254078e22180ca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Scope Glass
+    second: {fileID: 2100000, guid: 8653e1296772b4ff498ac04bf5a58bd6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shotgun Shell Cap
+    second: {fileID: 2100000, guid: 697c6150ae8c347d7bd918d33c77ea94, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shotgun Shell red
+    second: {fileID: 2100000, guid: fe2443ad12de14366b387f2594ffc983, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shovel Head
+    second: {fileID: 2100000, guid: e44374c1b71f74281baaf4171a42286c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sniper Scope
+    second: {fileID: 2100000, guid: cfd35f7294d9c4341aefa3de8434a8fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ump Black
+    second: {fileID: 2100000, guid: 03a9935370aa249cc83d2f0fac7a525b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood Stock
+    second: {fileID: 2100000, guid: 54a1c3167ca8241b4a9c8aa4ae93bd35, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 0
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

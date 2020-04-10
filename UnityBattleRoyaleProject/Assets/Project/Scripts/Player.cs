@@ -82,9 +82,12 @@ public class Player : NetworkBehaviour, IDamageable {
     private Health health;
 
     private float stepTimer;
+    private float stormDamageTimer = 0;
 
     private Animator playerAnimator;
     private NetworkAnimator playerNetworkAnimator;
+    private StormManager stormManager;
+
     private string modelName; // Current weapon or tool the player is holding
     private bool isInEnergyMode = false;
     private bool shouldAllowMovementInEnergyMode = false;
@@ -143,6 +146,12 @@ public class Player : NetworkBehaviour, IDamageable {
         playerRigidBody = GetComponent<Rigidbody>();
         health.OnHealthChanged += OnHealthChanged;
 
+        if(isServer)
+        {
+            stormManager = FindObjectOfType<StormManager>();
+            stormManager.OnShrink += OnStormShrink;
+        }
+
         if (isLocalPlayer)
         {
             // Game camera
@@ -193,13 +202,36 @@ public class Player : NetworkBehaviour, IDamageable {
         ShouldAllowMovementEnergyMode = true;
         hud.ShowScreen("regular");
 
-        foreach(Player p in FindObjectsOfType<Player>())
+        stormManager.ShouldShrink = true;
+
+        foreach (Player p in FindObjectsOfType<Player>())
         {
             if(p != this)
             {
                 p.RpcOnServerStartMatch();
             }
         }
+    }
+
+    void OnStormShrink()
+    {
+        if (!isServer) return;
+
+        foreach (Player p in FindObjectsOfType<Player>())
+        {
+            if (p != this)
+            {
+                p.RpcAlertShrink();
+            }
+        }
+    }
+
+    [ClientRpc]
+    public void RpcAlertShrink()
+    {
+        if (!isLocalPlayer) return;
+
+        hud.Alert();
     }
 
     [ClientRpc]
@@ -263,6 +295,7 @@ public class Player : NetworkBehaviour, IDamageable {
 
         // Update timers.
         resourceCollectionCooldownTimer -= Time.deltaTime;
+        stormDamageTimer -= Time.deltaTime;
         stepTimer -= Time.deltaTime;
 
         if (Input.GetKeyDown(changeFocalSideKey)) {
@@ -331,6 +364,8 @@ public class Player : NetworkBehaviour, IDamageable {
         } else {
             obstaclePlacementLock = false;
         }
+
+       
 
         UpdateWeapon();
 	}
@@ -658,6 +693,16 @@ public class Player : NetworkBehaviour, IDamageable {
     {
         GetComponent<Health>().Damage(amount);
         return 0;
+    }
+    public void StormDamage()
+    {
+        if (!isLocalPlayer) return;
+
+        if(stormDamageTimer <= 0)
+        {
+            stormDamageTimer = 1;
+            CmdDamage(gameObject, 1);
+        }
     }
 
     private void OnHealthChanged (float newHealth) {

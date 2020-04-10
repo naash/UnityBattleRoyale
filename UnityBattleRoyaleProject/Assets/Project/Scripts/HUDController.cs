@@ -5,9 +5,15 @@ using UnityEngine.UI;
 
 public class HUDController : MonoBehaviour
 {
+    //Event
+    public delegate void OnStartMatchDelegate();
+    public event OnStartMatchDelegate OnStartMatch;
+
     [Header("Screens")]
     [SerializeField] private GameObject regularScreen;
     [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private GameObject serverScreen;
+    [SerializeField] private GameObject clientScreen;
 
     [Header("Interface Elements")]
     [SerializeField] private Text healthText;
@@ -17,6 +23,8 @@ public class HUDController : MonoBehaviour
     [SerializeField] private Text weaponAmmunitionText;
     [SerializeField] private RectTransform weaponReloadBar;
     [SerializeField] private GameObject sniperAim;
+    [SerializeField] private Text serverPlayersText;
+    [SerializeField] private Text clientPlayersText;
 
     [Header("Tool Selector")]
     [SerializeField] private GameObject toolFocus;
@@ -34,6 +42,15 @@ public class HUDController : MonoBehaviour
     public int Resources {
         set {
             resourcesText.text = "Resources: " + value;
+        }
+    }
+
+    public int Players
+    {
+        set
+        {
+            serverPlayersText.text = "Players: " + value;
+            clientPlayersText.text = "Players: " + value;
         }
     }
 
@@ -110,5 +127,12 @@ public class HUDController : MonoBehaviour
     public void ShowScreen (string screenName) {
         regularScreen.SetActive(screenName == "regular");
         gameOverScreen.SetActive(screenName == "gameOver");
+        serverScreen.SetActive(screenName == "server");
+        clientScreen.SetActive(screenName == "client");
+    }
+
+    public void OnPressedStartMatch()
+    {
+        OnStartMatch?.Invoke();
     }
 }

@@ -2,37 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StormObject : MonoBehaviour
-{
-    [SerializeField] float initialDistance;
-    [SerializeField] float shrinkSmoothness = 0.01f;
+public class StormObject : MonoBehaviour {
+    [SerializeField] private float initialDistance;
+    [SerializeField] private float shrinkSmoothness;
+
     private float targetDistance;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+	// Use this for initialization
+	void Start () {
         targetDistance = initialDistance;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+	}
+	
+	// Update is called once per frame
+	void Update () {
         Vector3 direction = transform.position.normalized;
         Vector3 targetPosition = direction * targetDistance;
 
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * shrinkSmoothness);
-    }
+	}
 
-    public void MoveToDistance(float distance)
-    {
+    public void MoveToDistance (float distance) {
         targetDistance = distance;
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if(other.GetComponent<Player>() != null)
-        {
-            other.GetComponent<Player>().StormDamage();
+	private void OnTriggerStay (Collider otherCollider)
+	{
+        if (otherCollider.GetComponent<Player>() != null) {
+            otherCollider.GetComponent<Player>().StormDamage();
         }
-    }
+	}
 }

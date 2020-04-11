@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class HUDController : MonoBehaviour
 {
-    //Event
-    public delegate void OnStartMatchDelegate();
-    public event OnStartMatchDelegate OnStartMatch;
+    public delegate void StartMatchHandler();
+    public event StartMatchHandler OnStartMatch;
 
     [Header("Screens")]
     [SerializeField] private GameObject regularScreen;
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private GameObject serverScreen;
     [SerializeField] private GameObject clientScreen;
+    [SerializeField] private GameObject spawnScreen;
 
     [Header("Interface Elements")]
     [SerializeField] private Text healthText;
@@ -46,10 +46,8 @@ public class HUDController : MonoBehaviour
         }
     }
 
-    public int Players
-    {
-        set
-        {
+    public int Players {
+        set {
             serverPlayersText.text = "Players: " + value;
             clientPlayersText.text = "Players: " + value;
         }
@@ -86,9 +84,10 @@ public class HUDController : MonoBehaviour
 
         // Hide the sniper aim.
         sniperAim.SetActive(false);
-        alertText.enabled = false;
 
-    }
+        // Hide the alert text
+        alertText.gameObject.SetActive(false);
+	}
 
 	private void Update()
 	{
@@ -132,22 +131,21 @@ public class HUDController : MonoBehaviour
         gameOverScreen.SetActive(screenName == "gameOver");
         serverScreen.SetActive(screenName == "server");
         clientScreen.SetActive(screenName == "client");
+        spawnScreen.SetActive(screenName == "spawn");
     }
 
-    public void OnPressedStartMatch()
-    {
-        OnStartMatch?.Invoke();
+    public void OnPressedStartMatch () {
+        if (OnStartMatch != null) {
+            OnStartMatch();
+        }
     }
 
-    public void Alert()
-    {
-        alertText.enabled = true;
-
-        Invoke("HideAlert", 5.0f);
+    public void Alert () {
+        alertText.gameObject.SetActive(true);
+        Invoke("HideAlert", 5);
     }
 
-    void HideAlert()
-    {
-        alertText.enabled = false;
+    public void HideAlert () {
+        alertText.gameObject.SetActive(false);
     }
 }

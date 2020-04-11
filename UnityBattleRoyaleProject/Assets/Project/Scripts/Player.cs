@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.Networking.NetworkSystem;
+
 
 public class Player : NetworkBehaviour, IDamageable {
     public enum PlayerTool {
@@ -34,6 +34,7 @@ public class Player : NetworkBehaviour, IDamageable {
     [SerializeField] private GameObject[] obstaclePrefabs;
 
     [Header("Weapons")]
+    [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private GameObject shootOrigin;
     [SerializeField] private GameObject rocketPrefab;
     [SerializeField] private GameObject modelAxe;
@@ -53,15 +54,12 @@ public class Player : NetworkBehaviour, IDamageable {
     [SerializeField] private AudioSource soundHit;
 
     [Header("Visuals")]
-    [SerializeField] private GameObject playerContainer;
+    [SerializeField] private GameObject characterContainer;
     [SerializeField] private GameObject energyBall;
 
-    [Header("Energy State")]
+    [Header("EnergyMode")]
     [SerializeField] private float energyFallingSpeed;
     [SerializeField] private float energyMovingSpeed;
-
-    [Header("Debug")]
-    [SerializeField] private GameObject debugPositionPrefab;
 
     private bool isFocalPointOnLeft = true;
     private int resources = 0;
@@ -75,82 +73,70 @@ public class Player : NetworkBehaviour, IDamageable {
 
     private HUDController hud;
     private GameCamera gameCamera;
-    private Rigidbody playerRigidBody;
     private GameObject obstaclePlacementContainer;
     private GameObject obstacleContainer;
     private int obstacleToAddIndex;
     private Health health;
 
     private float stepTimer;
-    private float stormDamageTimer = 0;
 
     private Animator playerAnimator;
     private NetworkAnimator playerNetworkAnimator;
+    private string modelName; // Current weapon or tool the player is holding
+    private Rigidbody playerRigidbody;
+    private float stormDamageTimer;
     private StormManager stormManager;
 
-    private string modelName; // Current weapon or tool the player is holding
-    private bool isInEnergyMode = false;
-    private bool shouldAllowMovementInEnergyMode = false;
-
-    public bool ShouldAllowMovementEnergyMode
-    {
-        get
-        {
-            return shouldAllowMovementInEnergyMode;
-        }
-        set
-        {
-            shouldAllowMovementInEnergyMode = value;
-
-            if(value)
-            {
+    private bool shouldAllowEnergyMovement;
+    public bool ShouldAllowEnergyMovement {
+        get { return shouldAllowEnergyMovement; }
+        set {
+            shouldAllowEnergyMovement = value;
+            if (value == true) {
                 Cursor.lockState = CursorLockMode.Locked;
+                hud.ShowScreen("spawn");
             }
-          
         }
     }
 
-    public bool IsInEnergyMode
-    {
-        get
-        {
+    private bool isInEnergyMode;
+    public bool IsInEnergyMode {
+        get {
             return isInEnergyMode;
         }
-        set
-        {
-            if(value)
-            {
-                energyBall.SetActive(true);
-                playerContainer.transform.localScale = Vector3.zero;
-                playerRigidBody.useGravity = false;
-            }
-            else
-            {
-                playerRigidBody.useGravity = true;
-                energyBall.SetActive(false);
-                playerContainer.transform.localScale = Vector3.one;
-            }
-
+        set {
             isInEnergyMode = value;
+
+            if (value == true) {
+                playerRigidbody.useGravity = false;
+
+                energyBall.SetActive(true);
+                characterContainer.transform.localScale = Vector3.zero;
+            } else {
+                playerRigidbody.useGravity = true;
+
+                energyBall.SetActive(false);
+                characterContainer.transform.localScale = Vector3.one;
+
+                if (hud != null) hud.ShowScreen("regular");
+            }
         }
     }
 
 	// Use this for initialization
 	void Start () {
-      
-
         // Initialize values
         resources = initialResourceCount;
         weapons = new List<Weapon>();
         health = GetComponent<Health>();
-        playerRigidBody = GetComponent<Rigidbody>();
         health.OnHealthChanged += OnHealthChanged;
-
-        if(isServer)
-        {
+        playerRigidbody = GetComponent<Rigidbody>();
+        if (isServer) {
             stormManager = FindObjectOfType<StormManager>();
             stormManager.OnShrink += OnStormShrink;
         }
+
+        IsInEnergyMode = true;
 
         if (isLocalPlayer)
         {
@@ -162,20 +148,13 @@ public class Player : NetworkBehaviour, IDamageable {
 
             // HUD elements
             hud = FindObjectOfType<HUDController>();
-
-            if(isServer)
-            {
-                hud.ShowScreen("server");
-            }
-            else
-            {
-                hud.ShowScreen("client");
-            }
-            hud.OnStartMatch += OnServerStartMatch;
+            if (isServer) hud.ShowScreen("server");
+            else if (isClient) hud.ShowScreen("client");
             hud.Health = health.Value;
             hud.Resources = resources;
             hud.Tool = tool;
             hud.UpdateWeapon(null);
+            hud.OnStartMatch += OnServerStartMatch;
 
             // Listen to events.
             GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter>().OnFootstep += OnFootstep;
@@ -191,112 +170,88 @@ public class Player : NetworkBehaviour, IDamageable {
 
         // Obstacle container
         obstacleContainer = GameObject.Find("ObstacleContainer");
-
-        IsInEnergyMode = true;
 	}
 
-    void OnServerStartMatch()
-    {
+    void OnServerStartMatch () {
         if (!isServer) return;
 
-        ShouldAllowMovementEnergyMode = true;
-        hud.ShowScreen("regular");
-
+        ShouldAllowEnergyMovement = true;
         stormManager.ShouldShrink = true;
 
-        foreach (Player p in FindObjectsOfType<Player>())
-        {
-            if(p != this)
-            {
-                p.RpcOnServerStartMatch();
+        foreach (Player player in FindObjectsOfType<Player>()) {
+            if (player != this) {
+                player.RpcAllowMovement();
             }
         }
     }
 
-    void OnStormShrink()
-    {
+    void OnStormShrink () {
         if (!isServer) return;
 
-        foreach (Player p in FindObjectsOfType<Player>())
+        foreach (Player player in FindObjectsOfType<Player>())
         {
-            if (p != this)
-            {
-                p.RpcAlertShrink();
-            }
+            player.RpcAlertShrink();
         }
     }
 
     [ClientRpc]
-    public void RpcAlertShrink()
-    {
+    public void RpcAllowMovement () {
+        if (!isLocalPlayer) return;
+
+        ShouldAllowEnergyMovement = true;
+    }
+
+    [ClientRpc]
+    public void RpcAlertShrink () {
         if (!isLocalPlayer) return;
 
         hud.Alert();
     }
 
-    [ClientRpc]
-    public void RpcOnServerStartMatch()
-    {
+	private void FixedUpdate()
+	{
         if (!isLocalPlayer) return;
 
-        ShouldAllowMovementEnergyMode = true;
-        hud.ShowScreen("regular");
-    }
-
-    private void FixedUpdate()
-    {
-        if (!isLocalPlayer) return;
-
-        if(IsInEnergyMode)
-        {
-            if(ShouldAllowMovementEnergyMode)
+        if (IsInEnergyMode) {
+            if (shouldAllowEnergyMovement)
             {
-                //TODO move somewhere else 
                 float horizontalSpeed = Input.GetAxis("Horizontal") * energyMovingSpeed;
                 float depthSpeed = Input.GetAxis("Vertical") * energyMovingSpeed;
 
                 Vector3 cameraForward = Vector3.Scale(gameCamera.transform.forward, new Vector3(1, 0, 1)).normalized;
-                Vector3 moveVector = (gameCamera.transform.right * horizontalSpeed) + (cameraForward * depthSpeed);
+                Vector3 moveVector = (horizontalSpeed * gameCamera.transform.right) + (depthSpeed * cameraForward);
 
-                playerRigidBody.velocity = new Vector3(moveVector.x, energyFallingSpeed, moveVector.z);
+                playerRigidbody.velocity = new Vector3(moveVector.x, energyFallingSpeed, moveVector.z);
+            } else {
+                playerRigidbody.velocity = Vector3.zero;
             }
-            else
-            {
-                playerRigidBody.velocity = Vector3.zero;
-            }
-
         }
-    }
+	}
 
-
-    // Update is called once per frame
-    void Update () {
+	// Update is called once per frame
+	void Update () {
         if (!isLocalPlayer) return;
 
-        if(IsInEnergyMode)
-        {
-            RaycastHit hitInfo;
+        if (!ShouldAllowEnergyMovement) {
+            hud.Players = FindObjectsOfType<Player>().Length;
+        }
 
-            // 0.1f is a small offset to start the ray from inside the character
-            // it is also good to note that the transform position in the sample assets is at the base of the character
+        if (IsInEnergyMode) {
+            // Check if touched the floor
+            RaycastHit hitInfo;
             if (Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo, 1.0f))
             {
-                if(hitInfo.transform.GetComponent<Player>() == null)
-                {
+                if (hitInfo.transform.GetComponent<Player>() == null) {
+                    IsInEnergyMode = false;
                     CmdDeactivateEnergyBall(gameObject);
                 }
             }
         }
-        else
-        {
-            hud.Players = FindObjectsOfType<Player>().Length;
-
-        }
 
         // Update timers.
         resourceCollectionCooldownTimer -= Time.deltaTime;
-        stormDamageTimer -= Time.deltaTime;
         stepTimer -= Time.deltaTime;
+        stormDamageTimer -= Time.deltaTime;
 
         if (Input.GetKeyDown(changeFocalSideKey)) {
             isFocalPointOnLeft = !isFocalPointOnLeft;
@@ -365,8 +320,6 @@ public class Player : NetworkBehaviour, IDamageable {
             obstaclePlacementLock = false;
         }
 
-       
-
         UpdateWeapon();
 	}
 
@@ -424,6 +377,8 @@ public class Player : NetworkBehaviour, IDamageable {
     }
 
     private void SwitchTool () {
+        if (IsInEnergyMode) return;
+
         soundInterface.Play();
 
         AnimateUnequip();
@@ -648,9 +603,7 @@ public class Player : NetworkBehaviour, IDamageable {
                     RaycastHit shootHit;
                     if (Physics.Raycast(shootOrigin.transform.position, shootDirection, out shootHit))
                     {
-                        GameObject debugPositionInstance = Instantiate(debugPositionPrefab);
-                        debugPositionInstance.transform.position = shootHit.point;
-                        Destroy(debugPositionInstance, 0.5f);
+                        CmdAddBullet(shootHit.point);
 
                         if (shootHit.transform.GetComponent<IDamageable>() != null)
                         {
@@ -694,14 +647,13 @@ public class Player : NetworkBehaviour, IDamageable {
         GetComponent<Health>().Damage(amount);
         return 0;
     }
-    public void StormDamage()
-    {
+
+    public void StormDamage () {
         if (!isLocalPlayer) return;
 
-        if(stormDamageTimer <= 0)
-        {
+        if (stormDamageTimer <= 0) {
             stormDamageTimer = 1;
-            CmdDamage(gameObject, 1);
+            CmdDamage(gameObject, 2);
         }
     }
 
@@ -712,6 +664,7 @@ public class Player : NetworkBehaviour, IDamageable {
 
         if (newHealth < 0.01f) {
             Cursor.lockState = CursorLockMode.None;
+
             hud.ShowScreen("gameOver");
             CmdDestroy();
         }
@@ -801,9 +754,12 @@ public class Player : NetworkBehaviour, IDamageable {
         caller.GetComponent<Player>().PlayHitSound();
     }
 
-    public void PlayHitSound () {
+    public void PlayHitSound()
+    {
         soundHit.Play();
     }
+
+    // Network models
 
     public override void OnStartLocalPlayer()
 	{
@@ -811,8 +767,6 @@ public class Player : NetworkBehaviour, IDamageable {
 
         CmdRefreshModels();
 	}
-
-    //Network models
 
     [Command]
     void CmdRefreshModels () {
@@ -852,18 +806,27 @@ public class Player : NetworkBehaviour, IDamageable {
         modelRocketLauncher.SetActive(modelName == "RocketLauncher");
     }
 
-    //Network energy balls
+    // Network energy balls
     [Command]
-    void CmdDeactivateEnergyBall(GameObject caller)
-    {
-        if (!isServer) return;
-
+    void CmdDeactivateEnergyBall (GameObject caller) {
         RpcDeactivateEnergyBall(caller);
     }
 
     [ClientRpc]
-    public void RpcDeactivateEnergyBall(GameObject caller)
-    {
+    void RpcDeactivateEnergyBall (GameObject caller) {
+        DeactivateEnergyBall(caller);
+    }
+
+    void DeactivateEnergyBall (GameObject caller) {
         caller.GetComponent<Player>().IsInEnergyMode = false;
+    }
+
+    [Command]
+    void CmdAddBullet (Vector3 bulletPosition) {
+        GameObject bulletInstance = Instantiate(bulletPrefab);
+        bulletInstance.transform.position = bulletPosition;
+        NetworkServer.Spawn(bulletInstance);
+
+        Destroy(bulletInstance, 0.5f);
     }
 }

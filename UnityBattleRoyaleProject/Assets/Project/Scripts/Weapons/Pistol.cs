@@ -11,6 +11,6 @@ public class Pistol : Weapon {
         isAutomatic = false;
         name = "Pistol";
         aimVariation = 0.01f;
-        damage = 5;
+        damage = 4;
     }
 }

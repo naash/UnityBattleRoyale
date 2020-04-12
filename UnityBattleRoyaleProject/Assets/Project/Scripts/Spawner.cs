@@ -6,9 +6,10 @@ using UnityEngine.Networking;
 public class Spawner : NetworkBehaviour {
 
     [SerializeField] private GameObject prefab;
+    [SerializeField] private Vector3 positionOffset;
 
 	void Start () {
-        GameObject instance = Instantiate(prefab, transform.position, transform.rotation, transform.parent);
+        GameObject instance = Instantiate(prefab, transform.position + positionOffset, transform.rotation, transform.parent);
 
         NetworkServer.Spawn(instance);
 

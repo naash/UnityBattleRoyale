@@ -5,8 +5,7 @@ Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_Name: Character test 3
   m_Shader: {fileID: 4800000, guid: 76374158b4c4e5744b394e9290aae693, type: 3}
   m_ShaderKeywords: _COLOR_ON _OUTL_ON _TEX_ON
@@ -35,7 +34,7 @@ Material:
     - _DS: 0
     - _DetailTex: 1
     - _Outl: 1
-    - _Outline: 0.4
+    - _Outline: 1.14
     - _TintColor: 1
     - _TrOp: 0
     - _Trans: 0
@@ -43,4 +42,4 @@ Material:
     m_Colors:
     - _Asymmetry: {r: 0, g: 0.25, b: 0.5, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 0, g: 0.040882874, b: 0.312, a: 1}

@@ -10,7 +10,7 @@ public class MachineGun : Weapon {
         cooldownDuration = 0.08f;
         isAutomatic = true;
         name = "Machine Gun";
-        aimVariation = 0.03f;
+        aimVariation = 0.02f;
         damage = 3;
     }
 }

@@ -1,0 +1,284 @@
+fileFormatVersion: 2
+guid: 44335e1090f1e4bacb0ccc6ae7d317ef
+timeCreated: 1542323164
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Cactus 001
+    100002: Cactus 001.001
+    100004: Cactus 001.002
+    100006: Cactus 001.003
+    100008: Cube.002
+    100010: Cube.004
+    100012: Cube.005
+    100014: Cube.013
+    100016: Cube.014
+    100018: Cube.058
+    100020: Cube.060
+    100022: Cube.062
+    100024: Cube.286
+    100026: Cube.289
+    100028: Cube.293
+    100030: Cube.294
+    100032: Cylinder.003
+    100034: Rock 001.001
+    100036: Rock 001.002
+    100038: Rock 001.003
+    100040: Rock 001.004
+    100042: Rock 001.005
+    100044: Rock 001.006
+    100046: Rock 002.001
+    100048: Rock 002.002
+    100050: Rock 002.003
+    100052: Rock 002.004
+    100054: Rock 002.005
+    100056: Rock 002.006
+    100058: Rock 003.001
+    100060: Rock 003.002
+    100062: Rock 003.003
+    100064: Rock 003.004
+    100066: Rock 003.005
+    100068: Rock 003.006
+    100070: //RootNode
+    100072: Tree 001.001
+    100074: Tree 001.002
+    100076: Tree 002.001
+    100078: Tree 002.002
+    100080: Tree 003.001
+    100082: Tree 003.002
+    400000: Cactus 001
+    400002: Cactus 001.001
+    400004: Cactus 001.002
+    400006: Cactus 001.003
+    400008: Cube.002
+    400010: Cube.004
+    400012: Cube.005
+    400014: Cube.013
+    400016: Cube.014
+    400018: Cube.058
+    400020: Cube.060
+    400022: Cube.062
+    400024: Cube.286
+    400026: Cube.289
+    400028: Cube.293
+    400030: Cube.294
+    400032: Cylinder.003
+    400034: Rock 001.001
+    400036: Rock 001.002
+    400038: Rock 001.003
+    400040: Rock 001.004
+    400042: Rock 001.005
+    400044: Rock 001.006
+    400046: Rock 002.001
+    400048: Rock 002.002
+    400050: Rock 002.003
+    400052: Rock 002.004
+    400054: Rock 002.005
+    400056: Rock 002.006
+    400058: Rock 003.001
+    400060: Rock 003.002
+    400062: Rock 003.003
+    400064: Rock 003.004
+    400066: Rock 003.005
+    400068: Rock 003.006
+    400070: //RootNode
+    400072: Tree 001.001
+    400074: Tree 001.002
+    400076: Tree 002.001
+    400078: Tree 002.002
+    400080: Tree 003.001
+    400082: Tree 003.002
+    2300000: Cactus 001
+    2300002: Cactus 001.001
+    2300004: Cactus 001.002
+    2300006: Cactus 001.003
+    2300008: Cube.002
+    2300010: Cube.004
+    2300012: Cube.005
+    2300014: Cube.013
+    2300016: Cube.014
+    2300018: Cube.058
+    2300020: Cube.060
+    2300022: Cube.062
+    2300024: Cube.286
+    2300026: Cube.289
+    2300028: Cube.293
+    2300030: Cube.294
+    2300032: Cylinder.003
+    2300034: Rock 001.001
+    2300036: Rock 001.002
+    2300038: Rock 001.003
+    2300040: Rock 001.004
+    2300042: Rock 001.005
+    2300044: Rock 001.006
+    2300046: Rock 002.001
+    2300048: Rock 002.002
+    2300050: Rock 002.003
+    2300052: Rock 002.004
+    2300054: Rock 002.005
+    2300056: Rock 002.006
+    2300058: Rock 003.001
+    2300060: Rock 003.002
+    2300062: Rock 003.003
+    2300064: Rock 003.004
+    2300066: Rock 003.005
+    2300068: Rock 003.006
+    2300070: Tree 001.001
+    2300072: Tree 001.002
+    2300074: Tree 002.001
+    2300076: Tree 002.002
+    2300078: Tree 003.001
+    2300080: Tree 003.002
+    3300000: Cactus 001
+    3300002: Cactus 001.001
+    3300004: Cactus 001.002
+    3300006: Cactus 001.003
+    3300008: Cube.002
+    3300010: Cube.004
+    3300012: Cube.005
+    3300014: Cube.013
+    3300016: Cube.014
+    3300018: Cube.058
+    3300020: Cube.060
+    3300022: Cube.062
+    3300024: Cube.286
+    3300026: Cube.289
+    3300028: Cube.293
+    3300030: Cube.294
+    3300032: Cylinder.003
+    3300034: Rock 001.001
+    3300036: Rock 001.002
+    3300038: Rock 001.003
+    3300040: Rock 001.004
+    3300042: Rock 001.005
+    3300044: Rock 001.006
+    3300046: Rock 002.001
+    3300048: Rock 002.002
+    3300050: Rock 002.003
+    3300052: Rock 002.004
+    3300054: Rock 002.005
+    3300056: Rock 002.006
+    3300058: Rock 003.001
+    3300060: Rock 003.002
+    3300062: Rock 003.003
+    3300064: Rock 003.004
+    3300066: Rock 003.005
+    3300068: Rock 003.006
+    3300070: Tree 001.001
+    3300072: Tree 001.002
+    3300074: Tree 002.001
+    3300076: Tree 002.002
+    3300078: Tree 003.001
+    3300080: Tree 003.002
+    4300000: Cube.294
+    4300002: Cube.293
+    4300004: Cylinder.003
+    4300006: Cube.289
+    4300008: Cube.286
+    4300010: Tree 003.002
+    4300012: Tree 002.002
+    4300014: Tree 001.002
+    4300016: Tree 002.001
+    4300018: Tree 003.001
+    4300020: Tree 001.001
+    4300022: Rock 003.006
+    4300024: Rock 003.005
+    4300026: Rock 003.004
+    4300028: Rock 001.006
+    4300030: Rock 001.005
+    4300032: Rock 001.004
+    4300034: Rock 002.006
+    4300036: Rock 002.005
+    4300038: Rock 002.004
+    4300040: Cube.060
+    4300042: Cube.058
+    4300044: Cube.062
+    4300046: Rock 002.003
+    4300048: Rock 001.003
+    4300050: Rock 003.003
+    4300052: Rock 002.002
+    4300054: Rock 003.002
+    4300056: Rock 001.002
+    4300058: Rock 003.001
+    4300060: Rock 002.001
+    4300062: Rock 001.001
+    4300064: Cube.014
+    4300066: Cube.013
+    4300068: Cube.005
+    4300070: Cube.004
+    4300072: Cube.002
+    4300074: Cactus 001.003
+    4300076: Cactus 001.002
+    4300078: Cactus 001.001
+    4300080: Cactus 001
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
